@@ -1,0 +1,63 @@
+
+CREATE TABLE `Customers`
+(
+ `Customerid`      varchar(45) NOT NULL ,
+ `Customer Name`   char NOT NULL ,
+ `Customer Age`    integer NOT NULL ,
+ `Customer Gender` char NOT NULL ,
+
+PRIMARY KEY (`Customerid`)
+);
+
+
+CREATE TABLE `Ticket`
+(
+ `Ticketid`      varchar(45) NOT NULL ,
+ `Date_time`     datetime NOT NULL ,
+ `Customerid`    varchar(45) NOT NULL ,
+ `Cost`          decimal NOT NULL ,
+ `Start Station` char NOT NULL ,
+ `Destination`   char NOT NULL ,
+
+PRIMARY KEY (`Ticketid`),
+KEY `fkIdx_13` (`Customerid`),
+CONSTRAINT `FK_12` FOREIGN KEY `fkIdx_13` (`Customerid`) REFERENCES `Customers` (`Customerid`)
+);
+
+CREATE TABLE `Train`
+(
+ `Train_id`         varchar(45) NOT NULL ,
+ `Train Name`       char NOT NULL ,
+ `Starting Station` char NOT NULL ,
+ `Destination`      char NOT NULL ,
+
+PRIMARY KEY (`Train_id`)
+);
+
+
+CREATE TABLE `Reserved Ticket`
+(
+ `ReservedTicket_id` varchar(45) NOT NULL ,
+ `Coach Number`      varchar(45) NOT NULL ,
+ `Seat Number`       varchar(45) NOT NULL ,
+ `Ticketid`          varchar(45) NOT NULL ,
+ `Train_id`          varchar(45) NOT NULL ,
+
+PRIMARY KEY (`ReservedTicket_id`),
+KEY `fkIdx_39` (`Ticketid`),
+CONSTRAINT `FK_38` FOREIGN KEY `fkIdx_39` (`Ticketid`) REFERENCES `Ticket` (`Ticketid`),
+KEY `fkIdx_48` (`Train_id`),
+CONSTRAINT `FK_47` FOREIGN KEY `fkIdx_48` (`Train_id`) REFERENCES `Train` (`Train_id`)
+);
+
+CREATE TABLE `Unreserved Ticket`
+(
+ `Unreserved Ticket id` varchar(45) NOT NULL ,
+ `Ticketid`             varchar(45) NOT NULL ,
+
+PRIMARY KEY (`Unreserved Ticket id`),
+KEY `fkIdx_42` (`Ticketid`),
+CONSTRAINT `FK_41` FOREIGN KEY `fkIdx_42` (`Ticketid`) REFERENCES `Ticket` (`Ticketid`)
+);
+
+
